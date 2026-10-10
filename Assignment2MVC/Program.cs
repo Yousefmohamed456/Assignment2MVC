@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using SchoolSystem.Data;
+
 namespace Assignment2MVC
 {
     public class Program
@@ -6,7 +9,9 @@ namespace Assignment2MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Services.AddDbContext<SchoolDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
